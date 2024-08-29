@@ -20,6 +20,7 @@ const isPublicApiRoute=createRouteMatcher(
 
 export default clerkMiddleware((auth,req)=>{
     const {userId}=auth();
+    console.log(auth().userId)
     const currentUrl=new URL(req.url);
     const isHomePage=currentUrl.pathname==='/home';
     const isApiRequest=currentUrl.pathname.startsWith('/api');
@@ -28,7 +29,7 @@ export default clerkMiddleware((auth,req)=>{
         return NextResponse.redirect(new URL('/home',req.url));
     }
 
-    //not logged in
+    // not logged in
     if(!userId){
         if(!isPublicRoute(req) && !isPublicApiRoute(req) ){
             return NextResponse.redirect(new URL('/sign-in',req.url));
