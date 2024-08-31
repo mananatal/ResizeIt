@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 
 cloudinary.config({
-    cloud_name: process.env.NEXT_PUBLIC_CLOUD_NAME,
+    cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
@@ -17,6 +17,7 @@ interface CloudinaryUploadResult {
 
 
 export async function POST(request:NextRequest){
+    console.log("INSIDE")
     try {
         const {userId}=auth();
         if(!userId){
@@ -31,7 +32,7 @@ export async function POST(request:NextRequest){
         }
 
         if(
-            !process.env.NEXT_PUBLIC_CLOUD_NAME ||
+            !process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ||
             !process.env.CLOUDINARY_API_KEY ||
             !process.env.CLOUDINARY_API_SECRET ||
             !process.env.CLOUDINARY_IMAGE_FOLDER 

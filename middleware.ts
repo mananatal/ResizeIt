@@ -20,7 +20,6 @@ const isPublicApiRoute=createRouteMatcher(
 
 export default clerkMiddleware((auth,req)=>{
     const {userId}=auth();
-    console.log(auth().userId)
     const currentUrl=new URL(req.url);
     const isHomePage=currentUrl.pathname==='/home';
     const isApiRequest=currentUrl.pathname.startsWith('/api');
